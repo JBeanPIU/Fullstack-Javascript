@@ -25,4 +25,4 @@ app.listen(PORT, () => {
     console.log(`Server running on: http://localhost:${PORT}`);
 })
 
-// mostly used to setup all the separate pages*
+// mostly used to setup all the separate pages
