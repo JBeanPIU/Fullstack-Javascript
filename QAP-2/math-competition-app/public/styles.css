@@ -1,0 +1,42 @@
+.topBar, .bottomBar {
+    background-color: #f0f0f0; /* light grey background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
+.navBar {
+    margin-top: 10px;
+}
+
+.center {
+    background-color: #B5B6E4;
+    padding: 20px;
+    height: 60vh;
+
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #4F43AE;
+    text-align: center;
+    text-decoration: none; 
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.7s ease;
+}
+
+.button:hover {
+    background-color: red;
+}
+
+.navBar {
+    margin-top: 20px;
+    padding-right: 20px;
+}
