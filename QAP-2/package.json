@@ -1,0 +1,15 @@
+{
+  "name": "math-competition-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Cameron Beanland",
+  "license": "ISC",
+  "description": "a math competition app using EJS to solve problems on a web application. Solve problems and make your way through the (admittedly) small leaderboards!",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
+  }
+}
