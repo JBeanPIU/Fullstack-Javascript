@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboards | Hall of Fame 🥇</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- link to stylesheet -->
+</head>
+<body>
+    <div class="topBar"><!-- top bar/header -->
+        <h1>You're now in the leaderboard section.</h1>
+        <p>Take a look below and see fellow foes</p>
+        <p>Think you've got what it takes to defeat them? Try it out!</p>
+        <div class="navBar">
+            <a href="/quiz" class="button">Begin Trials</a>
+        </div>
+    </div>
+    <div class="center"><!-- main body -->
+        <h2>Top 10 Streaks</h2>
+            <table>
+                <tbody>
+                    <% leaderboards.forEach((entry, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= entry.streak %></td>
+                            <td><%= entry.questionsAnswered %></td>
+                            <td><%= entry.dateObtained %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+    
+            <% if (leaderboards.length === 0) { %>
+                <p>No records yet. Get to it!</p>
+            <% } %>
+    </div>
+    <footer>
+    </div>
+        <div class="bottomBar"><!-- bottom bar/footer -->
+            <p>all rights reserved, JBean© & Co. 2024 | We love QAP's</p>
+            <p>this'll remain consistent on all pages, I just love html tbh</p>
+        </div>
+    </footer>
+</body>
+</html>
