@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavish JDelights</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <body>
+        <!-- MAIN BODY-->
+        <main class="main-content">
+            <h1>Welcome to <%= restaurant.name %>!</h1>
+            <h2>Cuisine Type: <%= restaurant.cuisine %></h2>
+    
+            <!-- MENU ITEMS -->
+            <section>
+                <h3>Menu Items</h3>
+                <h3><%= Dishes %></h3>
+            </section>
+            <ul>
+                <li>
+                    <b><%= item.dish.name %></b>
+                    <i><%= item.dish.description %></i><%= item.dish.price %>
+                    <b><%= item.specialty %></b>  
+                </li>
+            </ul>
+            <div class="lil-btn">
+                <h3>Our specialty of the day is...</h3>
+                <a href="/alerts" class="cute-ass-button">Return to home</a>
+            </div>
+            <!-- BOTTOM SECTION (LARGELY USELESS) -->
+            <hr />
+            <footer>
+                <p>For more information, or if you have any questions/concerns please reach out to:</p>
+                <p>Email: <a href="mailto:jjbeanland@info.ca">jjbeanland@info.ca</a></p>
+                <p>(M): +1(709) 649-2913</p>
+                <p>(W): +1(800) 649-3333</p>
+                <p>or better yet, please don't, we're bankrupt.</p>
+            </footer>
+            <hr />
+        </main>
+</body>
+</html>
