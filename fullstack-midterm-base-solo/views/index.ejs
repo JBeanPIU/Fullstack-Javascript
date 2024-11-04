@@ -2,24 +2,84 @@
 <!-- By: Cameron Beanland -->
 <!-- Date: November 3rd, 2024 -->
 <html lang="en">
-    <head>
-        <title>Restaurants</title>
-        <link rel="stylesheet" type="text/css" href="./styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    </head>
-    <body>
-        <main class="main-content">
-            <h1>Restaurant Menus</h1>
-            <h2>Please choose your restaurant to get the menu</h2>
-            <form action="/restaurant" method="GET">
-                <label for="restaurantId">Select a restaurant:</label>
-                <select name="restaurantId" id="restaurantId">
-                    <% restaurants.forEach((restaurant) => { %>
-                        <option value="<%= restaurant.id %>"><%= restaurant.name %></option>
-                    <% }) %>
-                </select>
-                <button type="submit">Get the menu!</button>
-            </form>
-        </main>
-    </body>
+<head>
+    <title>JRestaurants</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <!-- MAIN BODY-->
+    <main class="main-content">
+        <h1><i><span class="purpText">JR</span><span class="darkText">estaurant Menus</span> 🍴</i></h1>
+        <h2>Choose one of the five restaurants below to get started.</h2>
+        <form action="/restaurant" method="GET">
+            <label for="restaurantId">Select a restaurant:</label>
+            <select name="restaurantId" id="restaurantId">
+                <% restaurants.forEach((restaurant) => { %>
+                    <option value="<%= restaurant.id %>"><%= restaurant.name %></option>
+                <% }) %>
+            </select>
+            <button type="submit">Get the menu!</button>
+        </form>
+        <div class="randomMenuItem">
+            <h3>Not sure what to get? Let us choose for you!</h3>
+        </div>
+        <div class="lil-btn">
+            <h3>Our specialty of the day is...</h3>
+            <a href="/alerts" class="cute-ass-button">Return to home</a>
+        </div>
+
+        <!-- FEATURED LIST -->
+        <div class="restaurant-descriptions">
+            <hr />
+            <h2>Featured Restaurants</h2>
+            <ul>
+                <li>
+                    <h3>The Gourmet Bistro</h3>
+                    <p><strong>Location:</strong> New York, NY / Seattle, WA / Ontario, CA</p>
+                    <p>Fine dine with our seasonal menu! Bringing a beautiful array of fresh local ingredients, our top of the line chefs provide gourmet dishes that will blow you away!</p>
+                    <p>(415) 678-2345</p>
+                    <div class="featureImg"><img src="images/bistro-gourmet.jpg" alt="an image of The Gourmet Bistro" width="220" height="150"></div>
+                </li>
+                <li>
+                    <h3>Spicy Kitchen</h3>
+                    <p><strong>Location:</strong> San Francisco, CA / Austin, TX</p>
+                    <p>Learn to master the heat in this boldly spicy restaurant! Take the Da Bomb challenge and receive at least $2 for your diligence. *no we will not reinburse for potential harm</p>
+                    <p>(206) 555-0198</p>                    
+                    <div class="featureImg"><img src="images/spicy-kitchen.jpg" alt="an image of The Gourmet Bistro" width="220" height="150"></div>                
+                </li>
+                <li>
+                    <h3>Healthy Eats</h3>
+                    <p><strong>Location:</strong> Austin, TX / Stephenville, NL</p>
+                    <p>Eat your greens and waste your money here! We love stealing cash for our 'top notch' veggies and fruits.</p>
+                    <p>(512) 742-3341</p>                    
+                    <div class="featureImg"><img src="images/healthy-eats.jpg" alt="an image of The Gourmet Bistro" width="220" height="150"></div>    
+                </li>
+                <li>
+                    <h3>Comfort Diner</h3>
+                    <p><strong>Location:</strong> Chicago, IL</p>
+                    <p>Ever wanted to feel like you're eating at home, while not at home? Swing on down and take a bite on our luxury, used beds & other various wares!</p>
+                    <p>(312) 559-8472</p>                    
+                    <div class="featureImg"><img src="images/comfort-diner.jpg" alt="an image of The Gourmet Bistro" width="220" height="150"></div>                
+                </li>
+                <li>
+                    <h3>Sweet Tooth Bakery</h3>
+                    <p><strong>Location:</strong> Seattle, WA / </p>
+                    <p>Indulge your sweet tooth with our artisanal baked goods. From cakes to pastries, every treat is made with love and the finest ingredients.</p>
+                    <p>(646) 281-9023</p>                    
+                    <div class="featureImg"><img src="images/sweet-tooth-bakery.jpg" alt="an image of The Gourmet Bistro" width="220" height="150"></div>                
+                </li>
+            </ul>
+            <!-- BOTTOM SECTION (LARGELY USELESS) -->
+            <hr />
+            <p>For more information, or if you have any questions/concerns please reach out to:</p>
+            <p>Email: jjbeanland@info.ca</p>
+            <p>(M): +1(709)649-2913</p>
+            <p>(W): +1(800)649-3333</p>
+            <p>or better yet, please don't we're bankrupt</p>
+            <hr />
+            
+        </div>
+    </main>
+</body>
 </html>
