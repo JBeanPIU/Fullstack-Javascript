@@ -2,7 +2,7 @@
 // By: Cameron Beanland
 // Date: November 3rd, 2024
 
-const {Dishes} = require("./data");
+const { Dishes } = require("./data");
 
 /**--------------------------------------------------------------------------------------------------------------
  * RANDOM MENU ITEM FUNCTION 🔥🔥🔥
@@ -11,12 +11,24 @@ const {Dishes} = require("./data");
  * @returns {*} A random menu item with a name, description, price, and special status.
  */
 function generateRandomMenuItem(cuisine) {
-  const cuisineDishes = Dishes[cuisine];
-  if (!cuisineDishes) {
-    throw new Error('Cuisine lost in the sauce');
-  }
-  const randomIndex = Math.floor(Math.random() * cuisineDishes.length);
-  return cuisineDishes[randomIndex]; 
+    // filter dishes by cuisine
+    const filteredDishes = Dishes.filter(dish => dish.cuisine === cuisine);
+
+    // check if available
+    if (filteredDishes.length === 0) {
+        return null; // or handle the case where no dishes are found
+    }
+
+    const randomIndex = Math.floor(Math.random() * filteredDishes.length);
+    
+    const randomDish = filteredDishes[randomIndex];
+
+    return {
+        name: randomDish.name,
+        description: randomDish.description,
+        price: randomDish.price,
+        special: randomDish.special || false // defaults to false if specialty status is missing
+    };
 }
 
 /**--------------------------------------------------------------------------------------------------------------
@@ -25,9 +37,9 @@ function generateRandomMenuItem(cuisine) {
  * @returns {*} A random cuisine type.
  */
 function selectRandomCuisine() {
-  const cuisines = Object.keys(Dishes);
-  const randomIndex = Math.floor(Math.random() * cuisines.length);
-  return cuisines[randomIndex];
+    const cuisines = ['italian', 'indian', 'chinese', 'vegan', 'mexican']; // small function lol
+    const randomIndex = Math.floor(Math.random() * cuisines.length);
+    return cuisines[randomIndex];
 }
 
 /**--------------------------------------------------------------------------------------------------------------
@@ -36,26 +48,33 @@ function selectRandomCuisine() {
  * @returns {*} An object representing the restaurant's menu, including the cuisine type and items.
  */
 function generateMenu() {
-  // starts off with a random cuisine type
-  const cuisine = selectRandomCuisine();
+    // select a random cuisine type
+    const selectedCuisine = selectRandomCuisine();
 
-  // creates list with 5-10 menu items for user to select
-  const lavishItems = Math.floor(Math.random() * 6) + 5; // rng that decides between 5 and 10 menu options
-  const menuOptions = [];
+    const itemCount = Math.floor(Math.random() * 6) + 5; // chooses between 5-10
+    const menuItems = [];
 
-  for (let i = 0; i < lavishItems; i++) {
-    menuOptions.push(generateRandomMenuItem(cuisine));
-  }
+    // generate random menu items for selected cuisine
+    for (let i = 0; i < itemCount; i++) {
+        const randomMenuItem = generateRandomMenuItem(selectedCuisine);
+        if (randomMenuItem) { // ensure if new item is valid
+            menuItems.push({
+                ...randomMenuItem,
+                isSpecial: Math.random() < 0.5, // 50% chance to be special
+            });
+        }
+    }
 
-  // returns completed menu
-  return {
-    cuisine,
-    items: menuOptions
-  };
+    // Return menu
+    return {
+        cuisine: selectedCuisine,
+        menuItems,
+    };
 }
 
 /**--------------------------------------------------------------------------------------------------------------
  * Additional utility functions can be defined here if needed.
  */
 
-module.exports = {generateRandomMenuItem, selectRandomCuisine, generateMenu};
+module.exports = { generateRandomMenuItem, selectRandomCuisine, generateMenu };
+
