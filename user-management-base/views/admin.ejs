@@ -1,0 +1,25 @@
+<!-- this ejs file is exclusive for admins, and can only be accessed using an admin account -->
+<%- include('partials/header', { title: "Admin Dashboard" }) %>
+<h1>Admin Dashboard</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+<form action="/logout" method="POST">
+    <button type="submit">Logout</button>
+</form>
+<%- include('partials/footer') %>

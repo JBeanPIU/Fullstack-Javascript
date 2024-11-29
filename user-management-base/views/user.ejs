@@ -1,0 +1,9 @@
+<!-- signing in as a user will bring you to here-->
+<%- include('partials/header', { title: "User Dashboard" }) %>
+<h1>Welcome, <%= user.username %>!</h1>
+<p>Your email: <%= user.email %></p>
+<p>Your role: <%= user.role %></p>
+<form action="/logout" method="POST">
+    <button type="submit">Logout</button>
+</form>
+<%- include('partials/footer') %>
