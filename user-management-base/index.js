@@ -25,6 +25,8 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// =======================================================================
+
 const USERS = [
     {
         id: 1,
@@ -58,7 +60,10 @@ const USERS = [
     }
 ];
 
-// FUNCTIONS
+// =======================================================================
+
+// FUNCTIONS section - Any functions or consts for the main program will be in here 
+
 let failedLogins = {}; // Initializing failedLogins here
 
 const isAdmin = (request, response, next) => {
@@ -77,9 +82,10 @@ const isUser = (request, response, next) => {
     }
 };
 
+// =======================================================================
 
 // GET /login - Render login form
-app.get("/login", (request, response) => {
+app.get("/login", (request, response) => { // very similar to the post login below, a lot of this is just validation and failed login checks
     response.render("login", { error: null });
 });
 
@@ -105,9 +111,10 @@ app.post("/login", (request, response) => {
 
     failedLogins[ip] = { attempts: 0, timestamp: null };
     request.session.user = user;
-    return response.redirect('/landing');
+    return response.redirect('/');
 });
 
+// =======================================================================
 
 // POST /login - Allows a user to login
 app.post("/login", (request, response) => {
@@ -132,23 +139,57 @@ app.post("/login", (request, response) => {
 
     failedLogins[ip] = { attempts: 0, timestamp: null };
     request.session.user = user;
-    return response.redirect('/landing');
+    return response.redirect('/'); // if done correctly, you'll get redirected to the index page
 });
 
 app.get("/login", (request, response) => {
-    response.render("login", { error: null });
+    response.render("login", { error: null }); 
 });
 
+// =======================================================================
 
 // GET /signup - Render signup form
 app.get("/signup", (request, response) => {
-    response.render("signup");
+    response.render("signup", { error: null }); 
 });
+
+// =======================================================================
 
 // POST /signup - Allows a user to signup
 app.post("/signup", (request, response) => {
-    
+    const { email, username, password } = request.body;
+
+    // input validation to make sure you add in all required fields
+    if (!email || !username || !password) {
+        return response.status(400).render("signup", {error: "All fields are required." });
+    }
+
+    // checks if user already exists (user@example.com should not work)
+    const existingUser = USERS.find(u => u.email === email);
+    if (existingUser) {
+        return response.status(400).render("signup", {error: "User already exists. Please use a different email or choose a different name." });
+    }
+
+    // consider this password hashed using salt rounds 
+    const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
+
+    // new user creation
+    const newUser = {
+        id: USERS.length + 1,
+        username,
+        email,
+        password: hashedPassword,
+        role: "user" // like above in the USERS constant, everything is left blank and gets added into the system when an account is created (so long as it's not already taken)
+    };
+
+    // adds the new user to the array
+    USERS.push(newUser);
+
+    // if everything is done correctly, should send back to login page so you can sign in
+    response.redirect("/login");
 });
+
+// =======================================================================
 
 // GET / - Render index page or redirect to landing if logged in
 app.get("/", (request, response) => {
@@ -157,6 +198,8 @@ app.get("/", (request, response) => {
     }
     response.render("index");
 });
+
+// =======================================================================
 
 // GET /landing - Shows a welcome page for users, shows the names of all users if an admin
 app.get("/landing", (request, response) => {
@@ -179,6 +222,7 @@ app.get("/user", isUser, (request, response) => {
     response.render("user", { user: request.session.user });
 });
 
+// =======================================================================
 
 // GET /logout - A custom route made by me to reroute users back to the initial index.ejs page upon logging out
 app.post("/logout", (request, response) => {
@@ -190,3 +234,4 @@ app.post("/logout", (request, response) => {
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
