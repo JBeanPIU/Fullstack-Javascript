@@ -1,5 +1,8 @@
+<!-- a page dedicated towards logging in, very basic; just provides two options to enter an email and password. (don't get it wrong too much or else) -->
 <%- include('partials/header', { title: "Login" }) %>
 <h1>Login</h1>
+<h3>Make sure to write down your password!</h3>
+<br />
 <% if (error) { %>
     <div class="error"><%= error %></div>
 <% } %>
